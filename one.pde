@@ -1,5 +1,6 @@
 ArrayList mouseMoves = new ArrayList();
 Size ellipseSize = new Size(50, 50);
+boolean started = false;
 int maxCount = 70;
 
 void setup(){
@@ -7,28 +8,19 @@ void setup(){
 }
 
 void draw() {
-
-  // draw a black background
   background(0);
-
-  // render all previous mouse moves
+  if (!started) return;
   renderPreviousMouseMoves();
-
-  // add a new mouse move
   Point mouseMove = new Point(mouseX, mouseY);
   mouseMoves.add(mouseMove);
-
-  // remove old mouse moves
   maintainMaxArraySize();
-
-  // draw new ellipse
-  drawEllipse(mouseMove.x, mouseMove.y);
 }
 
 void renderPreviousMouseMoves() {
   for (int i = mouseMoves.size() - 1; i > 0; i--) {
     Point move = mouseMoves.get(i);
-    fill(random(255), random(255), random(255), (i * 3));
+    fill(255, 255, 255, (i * 3));
+    stroke("#fff");
     drawEllipse(move.x, move.y, i, i);
   }
 }
@@ -42,3 +34,5 @@ void maintainMaxArraySize() {
 void drawEllipse(x, y, width, height) {
   ellipse(x, y, width || ellipseSize.width, height || ellipseSize.height);
 };
+
+document.addEventListener('mousemove', function() { started = true; }, false);
