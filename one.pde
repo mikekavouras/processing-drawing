@@ -20,7 +20,8 @@ void renderPreviousMouseMoves() {
   for (int i = mouseMoves.size() - 1; i > 0; i--) {
     Point move = mouseMoves.get(i);
     fill(255, 255, 255, (i * 3));
-    stroke("#fff");
+    noStroke();
+    smooth();
     drawEllipse(move.x, move.y, i, i);
   }
 }
